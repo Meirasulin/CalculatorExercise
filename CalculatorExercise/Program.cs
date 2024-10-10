@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CalculatorExercise
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Calculator calculator = new Calculator();
         while (true)
