@@ -35,7 +35,7 @@ namespace IntegrationTestProgram
         [TestMethod]
         public void TestAdditionIntegration()
         {
-            string input = "5\n3\n+\nexit\n";
+            string input = "5+3\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
@@ -47,7 +47,7 @@ namespace IntegrationTestProgram
         [TestMethod]
         public void TestDivisionIntegration()
         {
-            string input = "10\n2\n/\nexit\n";
+            string input = "10/2\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
@@ -59,7 +59,7 @@ namespace IntegrationTestProgram
         [TestMethod]
         public void TestDivisionByZeroIntegration()
         {
-            string input = "10\n0\n/\nexit\n";
+            string input = "10/0\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
@@ -71,31 +71,31 @@ namespace IntegrationTestProgram
         [TestMethod]
         public void TestInvalidInputIntegration()
         {
-            string input = "abc\n3\n+\nexit\n";
+            string input = "abc+2\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
 
             string output = _stringWriter.ToString();
-            Assert.IsTrue(output.Contains("Invalid input. Please enter numeric values"));
+            Assert.IsTrue(output.Contains("Invalid input. Please enter valid arithmetic expression."));
         }
 
         [TestMethod]
         public void TestInvalidOperationIntegration()
         {
-            string input = "5\n3\n#\nexit\n";
+            string input = "5$3\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
 
             string output = _stringWriter.ToString();
-            Assert.IsTrue(output.Contains("Invalid operation"));
+            Assert.IsTrue(output.Contains("Invalid input. Please enter valid arithmetic expression."));
         }
 
         [TestMethod]
         public void TestMultipleOperationsIntegration()
         {
-            string input = "5\n3\n+\n10\n2\n*\nexit\n";
+            string input = "5+3\n10*2\nexit\n";
             _stringReader = new StringReader(input);
             Console.SetIn(_stringReader);
             Program.Main(new string[] { });
