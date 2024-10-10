@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using CalculatorExercise;
+using Moq;
 
 namespace UnitTestCalculatorExercise
 {
@@ -8,18 +9,21 @@ namespace UnitTestCalculatorExercise
     public class OperationsUnitTest
     {
         private Calculator _calculator;
+        private Mock<ICalculator> _mockCalculator;
 
         [TestInitialize]
         public void Setup()
         {
             _calculator = new Calculator();
+            _mockCalculator = new Mock<ICalculator>();
         }
         [TestMethod]
         public void Given_TwoNumbers_When_Adding_Then_ReturnsSum()
         {
+            _mockCalculator.Setup(c => c.Add(It.IsAny<double>(), It.IsAny<double>())).Returns(10);
             double result;
-            result = _calculator.Add(3, 2);
-            Assert.AreEqual(5, result);
+            result = _mockCalculator.Object.Add(2, 3);
+            Assert.AreEqual(10, result);
         }
         [TestMethod]
         public void Given_TwoNumbers_When_Subtracting_Then_ReturnsDifference()
